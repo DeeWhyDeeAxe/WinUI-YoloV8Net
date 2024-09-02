@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUI_YoloV8_ObjectDetection.Pages.MediaInferencePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI_YoloV8_ObjectDetection.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodel="using:WinUI_YoloV8_ObjectDetection.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MediaInferenceViewModel}"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="MediaInferenceGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="ReferenceInstruction" Visibility="{Binding ReferenceGuideVisible}" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" TextAlignment="Center"> Drag and drop your files onto this window <LineBreak/><LineBreak/>OR</TextBlock>
+            <Button x:Name="FilePicker" Click="FilePicker_Click" Style="{ThemeResource AccentButtonStyle}" Content="Click here to browse for PC for images"/>
+        </StackPanel>
+        <MediaPlayerElement x:Name="OriginalVideoMediaPlayerElement" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Image x:Name="OriginalImage" Grid.Column="0" Grid.Row="1" Stretch="Uniform" VerticalAlignment="Top"/>
+        <Image x:Name="InferenceImage" Grid.Column="1" Grid.Row="1" Stretch="Uniform" VerticalAlignment="Top"/>
+        <ProgressRing Visibility="{Binding InferenceLoading}" Grid.Column="1" Grid.Row="1"/>
+    </Grid>
+</Page>

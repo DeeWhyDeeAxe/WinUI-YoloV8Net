@@ -1,36 +1,40 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using WinUI_YoloV8_ObjectDetection.Pages;
 
 namespace WinUI_YoloV8_ObjectDetection
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public static MainWindow Instance { get; private set; }
+
+        private readonly Type DefaultFrame = typeof(MediaInferencePage);
         public MainWindow()
         {
             this.InitializeComponent();
+            Instance = this;
+            ExtendsContentIntoTitleBar = true;
+
+            PageViewFrame.Navigate(DefaultFrame);
+            NavView.SelectionChanged += NavView_SelectionChanged;
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            myButton.Content = "Clicked";
+            var selectedItem = (NavigationViewItem)args.SelectedItem;
+
+            if (selectedItem == null)
+                return;
+
+            if (args.IsSettingsSelected)
+            {
+                PageViewFrame.Navigate(typeof(Settings));
+            }
+            else
+            {
+                PageViewFrame.Navigate(Type.GetType(selectedItem.Tag.ToString()));
+            }
         }
     }
 }
