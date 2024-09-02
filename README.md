@@ -2,8 +2,9 @@
 C# .NET 8 implementation of YoloV8 for real-time object detection on WinUI
 
 # Features
-- Media inference (only image is supported for now)
-- 
+- Media inference for both image and video
+- Camera inferencing
+  
 ## Getting Started
 # Prerequisites
 - YoloV8 model exported to ONNX, follow this [guide](https://docs.ultralytics.com/integrations/onnx/) 
@@ -24,8 +25,8 @@ var outputImage = await Task.Run(() => yoloV8Predictor.PredictAsync(image));
  ```
 
  # Built With
- **.NET 8 
- **WinUI
+- .NET 8 
+- WinUI
 
 ![](Demo.gif)
 
